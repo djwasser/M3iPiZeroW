@@ -8,13 +8,21 @@ export class StatisReadCharacteristic extends Characteristic {
     super({
       uuid: uuid,
       properties: ['read'],
+      value: null,
       descriptors: [
         new Descriptor({
           uuid: '2901',
           value: description
         })
-      ],
-      value: Buffer.from(value)
-    })
+      ]
+    });
+    this.uuid = uuid;
+    this.description = description;
+    this._value = Buffer.isBuffer(value) ? value : new Buffer(value);
   }
+  
+  onReadRequest(offset, callback) {
+    console.log('OnReadRequest : ' + this.description);
+    callback(this.RESULT_SUCCESS, this._value.slice(offset, this._value.length));
+  };
 }
