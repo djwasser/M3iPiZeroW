@@ -18,17 +18,14 @@ export class FitnessMachineService extends PrimaryService {
         new StaticReadCharacteristic('2ACC', 'Fitness Machine Feature', [0x02, 0x44, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]), //rpm, power, hr
         new FitnessMachineStatusCharacteristic()
       ]
-    })
+    });
+    this.indoorBikeData = indoorBikeData;
   }
 
   /**
-   * Notify subscriber (e.g. Zwift) of new Fitness Machine Indoor Bike Data Measurement.
-   * @param {object} measurement - new cycling power measurement.
-   * @param {number} measurement.rpm - instantaneous cadence (rpm).
-   * @param {number} measurement.power - current power (watts)
-   * @param {number} measurement.hr - instantaneous heart rate (bpm).
+   * Transfer evernt to the given characteristics.
    */
-  updateMeasurement(measurement) {
-    this.characteristics[0].updateMeasurement(measurement)
+  notify(event) {
+    this.indoorBikeData.notify(event);
   }
 }
