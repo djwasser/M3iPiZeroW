@@ -14,7 +14,7 @@ export class FitnessMachineService extends PrimaryService {
     super({
       uuid: '1826',
       characteristics: [
-        new StaticReadCharacteristic('2ACC', 'Fitness Machine Feature', [0x02, 0x44, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]),
+        new StaticReadCharacteristic('2ACC', 'Fitness Machine Feature', [0x02, 0x44, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]), //rpm, power, hr
         new FitnessMachineStatusCharacteristic(),
         new IndoorBikeDataCharacteristic(),
       ]
