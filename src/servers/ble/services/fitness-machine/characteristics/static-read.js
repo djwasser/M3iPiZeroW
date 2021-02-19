@@ -1,7 +1,7 @@
 import {Characteristic, Descriptor} from '@abandonware/bleno';
 
 /**
- * Bluetooth LE GATT Sensor Location Characteristic implementation.
+ * Bluetooth LE GATT Statis Read Characteristic implementation.
  */
 export class StatisReadCharacteristic extends Characteristic {
   constructor(uuid, description, value) {
@@ -11,10 +11,10 @@ export class StatisReadCharacteristic extends Characteristic {
       descriptors: [
         new Descriptor({
           uuid: '2901',
-          value: 'Sensor Location'
+          value: description
         })
       ],
-      value: Buffer.from([13]) // power value measured at rear hub
+      value: Buffer.from(value)
     })
   }
 }
