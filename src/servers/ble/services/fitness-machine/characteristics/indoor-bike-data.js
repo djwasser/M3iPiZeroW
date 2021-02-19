@@ -56,7 +56,6 @@ export class IndoorBikeDataCharacteristic extends Characteristic {
 			var hr = event.hr;
 			If (DEBUG) console.log("[IndoorBikeDataCharacteristic] hr : " + hr);
 			buffer.writeUInt16LE(hr, index);
-			index += 2;
 			
 			this._updateValueCallback(buffer);
 		}
