@@ -17,29 +17,53 @@ export class IndoorBikeDataCharacteristic extends Characteristic {
     });
     this._updateValueCallback = null;
   }
+  
+	onSubscribe(maxValueSize, updateValueCallback) {
+		this._updateValueCallback = updateValueCallback;
+		return this.RESULT_SUCCESS;
+	};
 
-  /**
-   * Notify subscriber (e.g. Zwift) of new Indoor Bike Data.
-   * @param {object} measurement - new csc measurement.
-   * @param {object} measurement.crank - last crank event.
-   * @param {number} measurement.crank.revolutions - revolution count at last crank event.
-   * @param {number} measurement.crank.timestamp - timestamp at last crank event.
-   */
-  updateMeasurement({ crank }) {
-    let flags = 0;
+	onUnsubscribe() {
+		this._updateValueCallback = null;
+		return this.RESULT_UNLIKELY_ERROR;
+	};  
 
-    const value = Buffer.alloc(5);
+	notify(event) {
+		if (!('power' in event) && !('hr' in event) && !('rpm' in event) {
+			// ignore events that do not contain complete data set
+			return this.RESULT_SUCCESS; 
+		}
 
-    const revolutions16bit = crank.revolutions & 0xffff;
-    const timestamp16bit = Math.round(crank.timestamp * CRANK_TIMESTAMP_SCALE) & 0xffff;
-    value.writeUInt16LE(revolutions16bit, 1);
-    value.writeUInt16LE(timestamp16bit, 3);
-    flags |= FLAG_HASCRANKDATA;
+		if (this._updateValueCallback) {
+			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] Notify");
+			var buffer = new Buffer(10);
+			// Set flags for providing rpm + power + heart rate
+			buffer.writeUInt8(0x45, 0);
+			buffer.writeUInt8(0x02, 1);
 
-    value.writeUInt8(flags, 0);
+			var index = 2;
+			
+			var rpm = event.rpm;
+			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] rpm: " + rpm);
+			buffer.writeInt16LE(rpm * 2, index);
+			index += 2;
+			
+			var power = event.power;
+			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] power: " + power);
+			buffer.writeInt16LE(power, index);
+			index += 2;
 
-    if (this.updateValueCallback) {
-      this.updateValueCallback(value)
-    }
-  }
+			var hr = event.hr;
+			If (DEBUG) console.log("[IndoorBikeDataCharacteristic] hr : " + hr);
+			buffer.writeUInt16LE(hr, index);
+			index += 2;
+			
+			this._updateValueCallback(buffer);
+		}
+		else
+		{
+			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] nobody is listening");
+		}
+		return this.RESULT_SUCCESS;
+	}
 }
