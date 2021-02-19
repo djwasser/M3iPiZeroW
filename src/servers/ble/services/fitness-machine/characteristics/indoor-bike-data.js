@@ -10,15 +10,16 @@ export class IndoorBikeDataCharacteristic extends Characteristic {
       properties: ['notify'],
       descriptors: [
         new Descriptor({
-          uuid: '2903',
+          uuid: '2902',
           value: Buffer.alloc(2)
         })
       ]
-    })
+    });
+    this._updateValueCallback = null;
   }
 
   /**
-   * Notify subscriber (e.g. Zwift) of new CSC Measurement.
+   * Notify subscriber (e.g. Zwift) of new Indoor Bike Data.
    * @param {object} measurement - new csc measurement.
    * @param {object} measurement.crank - last crank event.
    * @param {number} measurement.crank.revolutions - revolution count at last crank event.
