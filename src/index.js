@@ -53,12 +53,9 @@ function sendFillInData() {
 }
 
 noble.on('discover', (peripheral) => {
-
    	//console.log(`[Central] Found device ${peripheral.advertisement.localName} ${peripheral.address}`); 
-	if (peripheral.advertisement.localName == "M3") 
-	{
-        try
-        {
+	if (peripheral.advertisement.localName == "M3") {
+		try {
 			var result = keiserParser.parseAdvertisement(peripheral);
 			if (targetDeviceId == -1) {
 				if (result.realTime) {
@@ -68,8 +65,7 @@ noble.on('discover', (peripheral) => {
 				} else {
 					return;
 				}
-			} 
-			
+			}
 			if (result.ordinalId == targetDeviceId) {
 				console.log(`Bike ${result.ordinalId}: ${result.realTime} ${result.cadence} ${result.power} ${result.gear} ${result.duration}`); 
 				if (result.realTime) {
@@ -90,10 +86,10 @@ noble.on('discover', (peripheral) => {
 					}
 				}
 			}
-        } 
-        catch (err) { 
-            console.log(`\tError parsing: ${err}`);
-            console.log(`\t ${err.stack}`);
-        }
-    }
+		} 
+		catch (err) {
+			console.log(`\tError parsing: ${err}`);
+			console.log(`\t ${err.stack}`);
+		}
+	}
 });
