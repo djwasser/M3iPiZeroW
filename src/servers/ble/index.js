@@ -1,3 +1,4 @@
+// This likely wiil take place of keiserBLE from keiser2Zwift repo
 import {CyclingPowerService} from './services/cycling-power'
 import {CyclingSpeedAndCadenceService} from './services/cycling-speed-and-cadence'
 import {FitnessMachineService} from './services/fitness-machine'
