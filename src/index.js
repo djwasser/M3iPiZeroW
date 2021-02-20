@@ -48,7 +48,7 @@ function sendFillInData() {
 	}
 
 	console.log("Sending fill in data");
-	keiserBLE.notifyFTMS(dataToSend);
+	keiserBLE.notifyClient(dataToSend);
 	fillInTimer = setTimeout(sendFillInData, 1000);
 }
 
@@ -85,7 +85,7 @@ noble.on('discover', (peripheral) => {
 					}
 
 					if (connectedCount > 0) {
-						keiserBLE.notifyFTMS(dataToSend);
+						keiserBLE.notifyClient(dataToSend);
 						fillInTimer = setTimeout(sendFillInData, 1000);
 					}
 				}
