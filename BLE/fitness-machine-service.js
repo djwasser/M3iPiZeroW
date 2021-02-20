@@ -15,7 +15,7 @@ class FitnessMachineService extends Bleno.PrimaryService {
 			super({
 				uuid: '1826',
 				characteristics: [
-					new StaticReadCharacteristic('2ACC', 'Fitness Machine Feature', [0x02, 0x44, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]), // Feature Characteristics
+					new StaticReadCharacteristic('2ACC', 'Fitness Machine Feature', [0x02, 0x44, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]), // rpm, hr, power
 					indoorBikeData,
 					fitnessMachineStatus
 				]
