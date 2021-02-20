@@ -1,3 +1,4 @@
+//exact copy of repo
 global.atob = require("atob");
 
 const encodeStringToBytes = (rawString) => {
