@@ -29,6 +29,7 @@ export class FitnessMachineStatusCharacteristic extends Characteristic {
   constructor() {
     super({
       uuid: '2ADA',
+      value: null
       properties: ['notify'],
       descriptors: [
         new Descriptor({
