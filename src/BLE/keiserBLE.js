@@ -13,8 +13,8 @@ class KeiserBLE extends EventEmitter {
 
 		this.setName();		
 
-		this.csp = new CyclingPowerService();
-		this.ftms = new FitnessMachineService(); 
+		this.cps = new CyclingPowerService();
+		this.fms = new FitnessMachineService(); 
 
 		let self = this;
 		console.log(`[${this.name} starting]`);
@@ -39,8 +39,9 @@ class KeiserBLE extends EventEmitter {
 			self.emit('advertisingStart', error);
 
 			if (!error) {
-				bleno.setServices([self.csp
-				, self.ftms
+				bleno.setServices([
+					self.cps, 
+					self.fms
 				], 
 				(error) => {
 					console.log(`[${this.name} setServices] ${(error ? 'error ' + error : 'success')}`);
@@ -79,10 +80,10 @@ class KeiserBLE extends EventEmitter {
 
 	}
 
-	// notifiy BLE services
-	notifyFTMS(event) {
-		this.csp.notify(event);
-		this.ftms.notify(event);
+	// notify BLE Client
+	notifyClient(event) {
+		this.cps.notify(event);
+		this.fms.notify(event);
 	};
 
 	setDeviceId(deviceId) {
