@@ -1,3 +1,9 @@
+import util from 'util';
+import {EventEmitter} from 'events';
+import {Timer} from '../util/timer';
+import {scan} from '../util/ble-scan';
+import {macAddress} from '../util/mac-address';
+
 // Setup multi role support and two different adapters for Peripheral and Central
 process.env['NOBLE_MULTI_ROLE'] = 1
 process.env['NOBLE_REPORT_ALL_HCI_EVENTS'] = 1
@@ -6,7 +12,7 @@ process.env['NOBLE_HCI_DEVICE_ID'] = 1
 
 const noble = require('@abandonware/noble');
 const keiserParser = require('./keiserParser.js')
-const KeiserBLE = require('./BLE/keiserBLE')
+const KeiserBLE = require('./servers/ble/index.js')
 
 var fillInTimer = null;
 var dataToSend = null;
