@@ -4,19 +4,20 @@ import {Characteristic, Descriptor} from '@abandonware/bleno';
  * Bluetooth LE GATT Indor Bike Data Characteristic implementation.
  */
 export class IndoorBikeDataCharacteristic extends Characteristic {
-  constructor() {
-    super({
-      uuid: '2AD2',
-      properties: ['notify'],
-      descriptors: [
-        new Descriptor({
-          uuid: '2902',
-          value: Buffer.alloc(2)
-        })
-      ]
-    });
-    this._updateValueCallback = null;
-  }
+	constructor() {
+		super({
+			uuid: '2AD2',
+			value: null,
+			properties: ['notify'],
+			descriptors: [
+				new Descriptor({
+					uuid: '2902',
+					value: Buffer.alloc(2)
+				})
+			]
+		});
+		this._updateValueCallback = null;
+	}
   
 	onSubscribe(maxValueSize, updateValueCallback) {
 		this._updateValueCallback = updateValueCallback;
@@ -45,7 +46,7 @@ export class IndoorBikeDataCharacteristic extends Characteristic {
 			
 			var rpm = event.rpm;
 			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] rpm: " + rpm);
-			buffer.writeInt16LE(rpm * 2, index);
+			buffer.writeUInt16LE(rpm, index);
 			index += 2;
 			
 			var power = event.power;
