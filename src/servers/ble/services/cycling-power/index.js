@@ -12,7 +12,7 @@ export class CyclingPowerService extends PrimaryService {
 		super({
 			uuid: '1818',
 			characteristics: [
-				new CyclingPowerMeasurementCharacteristic(),
+				powerMeasurement,
 				new CyclingPowerFeatureCharacteristic(),
 				new SensorLocationCharacteristic(),
 			]
