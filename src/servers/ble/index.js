@@ -7,18 +7,19 @@ import {BleServer} from '../../util/ble-server'
 export const DEFAULT_NAME = 'M3iPiZeroW';
 
 /**
- * Handles communication with apps (e.g. Zwift) using the standard Bluetooth
- * LE GATT Cycling Power Service.
+ * Handles communication with apps (e.g. Zwift) using the standard Bluetooth Services
+ * LE GATT Cycling Power, Cycling Speed and Cadence, & Fitness Maschine
  */
-export class GymnasticonServer extends BleServer {
-	/**
-   * Create a GymnasticonServer instance.
+export class M3iPiZeroW extends BleServer {
+  /**
+   * Create a M3iPiZeroWServer instance.
    * @param {Bleno} bleno - a Bleno instance.
-	 */
+   */
   constructor(bleno, name=DEFAULT_NAME) {
     super(bleno, name, [
       new CyclingPowerService(),
       new CyclingSpeedAndCadenceService(),
+      new FtinessMachineService()
     ])
   }
 
