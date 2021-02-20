@@ -1,7 +1,7 @@
 const bleno = require('@abandonware/bleno');
 const EventEmitter = require('events');
 const CyclingPowerService = require('./cycling-power-service');
-const FitnessMachineService = require('./ftms-service');
+const FitnessMachineService = require('./fitness-machine-service');
 
 var keiserDeviceId = -1;
 var isPoweredOn = false;
@@ -104,8 +104,9 @@ class KeiserBLE extends EventEmitter {
 
 	checkStartConditions() {
 		if (isPoweredOn && keiserDeviceId != -1) {
-			bleno.startAdvertising(this.name, [this.csp.uuid
-			, this.ftms.uuid
+			bleno.startAdvertising(this.name, [
+				this.cps.uuid, 
+				this.fms.uuid
 			]);
 		}
 	}
