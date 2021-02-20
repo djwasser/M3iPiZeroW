@@ -1,7 +1,6 @@
 import {PrimaryService} from '@abandonware/bleno';
 import {CyclingPowerMeasurementCharacteristic} from './characteristics/cycling-power-measurement';
-import {CyclingPowerFeatureCharacteristic} from './characteristics/cycling-power-feature';
-import {SensorLocationCharacteristic} from './characteristics/sensor-location';
+import {StaticReadCharacteristic} from './characteristics/static-read';
 
 /**
  * Bluetooth LE GATT Cycling Power Service implementation.
@@ -13,8 +12,8 @@ export class CyclingPowerService extends PrimaryService {
 			uuid: '1818',
 			characteristics: [
 				powerMeasurement,
-				new CyclingPowerFeatureCharacteristic(),
-				new SensorLocationCharacteristic(),
+				new StaticReadCharacteristic('2A65', 'Cycling Power Feature', [0x08, 0, 0, 0]), //0x08 - crank revolutions present
+				new SensorLocationCharacteristic('2A5D', 'Sensor Location', [13]), // 13 = rear hub
 			]
 		});
 		this.powerMeasurement = powerMeasurement;
