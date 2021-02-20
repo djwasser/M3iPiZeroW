@@ -46,9 +46,9 @@ class IndoorBikeDataCharacteristic extends Bleno.Characteristic {
 
 			var index = 2;
 			
-			var rpm = event.rpm;
+			var rpm = event.rpm & 0xffff;  // force value to be 16-bit integer
 			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] rpm: " + rpm);
-			buffer.writeInt16LE(rpm * 2, index);
+			buffer.writeInt16LE(rpm, index);
 			index += 2;
 			
 			var power = event.power;
