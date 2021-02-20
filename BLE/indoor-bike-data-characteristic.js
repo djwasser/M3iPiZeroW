@@ -32,46 +32,34 @@ class IndoorBikeDataCharacteristic extends Bleno.Characteristic {
 	};
 
 	notify(event) {
-		if (!('power' in event) && !('hr' in event)) {
-			// ignore events with no power and no hr data
+		if (!('power' in event) && !('hr' in event) && !('rpm' in event)) {
+			// ignore events that do not have complete data set
 			return this.RESULT_SUCCESS; 
 		}
 
 		if (this._updateValueCallback) {
 			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] Notify");
 			var buffer = new Buffer(10);
-			// speed + power + heart rate
-			buffer.writeUInt8(0x44, 0);
+			// set flags for rpm + power + heart rate
+			buffer.writeUInt8(0x45, 0);
 			buffer.writeUInt8(0x02, 1);
 
 			var index = 2;
-			if ('speed' in event) {
-				var speed = parseInt(event.speed);
-				if (DEBUG) console.log("[IndoorBikeDataCharacteristic] speed: " + speed);
-				buffer.writeInt16LE(speed, index);
-				index += 2;
-			}
 			
-			if ('rpm' in event) {
-				var rpm = event.rpm;
-				if (DEBUG) console.log("[IndoorBikeDataCharacteristic] rpm: " + rpm);
-				buffer.writeInt16LE(rpm * 2, index);
-				index += 2;
-			}
+			var rpm = event.rpm;
+			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] rpm: " + rpm);
+			buffer.writeInt16LE(rpm * 2, index);
+			index += 2;
 			
-			if ('power' in event) {
-				var power = event.power;
-				if (DEBUG) console.log("[IndoorBikeDataCharacteristic] power: " + power);
-				buffer.writeInt16LE(power, index);
-				index += 2;
-			}
+			var power = event.power;
+			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] power: " + power);
+			buffer.writeInt16LE(power, index);
+			index += 2;
 
-			if ('hr' in event) {
-				var hr = event.hr;
-				if (DEBUG) console.log("[IndoorBikeDataCharacteristic] hr : " + hr);
-				buffer.writeUInt16LE(hr, index);
-				index += 2;
-			}
+			var hr = event.hr;
+			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] hr : " + hr);
+			buffer.writeUInt16LE(hr, index);
+
 			this._updateValueCallback(buffer);
 		}
 		else
