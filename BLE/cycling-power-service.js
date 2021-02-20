@@ -11,7 +11,7 @@ class CyclingPowerService extends Bleno.PrimaryService {
         uuid: '1818',
         characteristics: [
           powerMeasurement,
-          new StaticReadCharacteristic('2A65', 'Cycling Power Feature', [0x08, 0, 0, 0]), // 0x08 - crank revolution counter
+          new StaticReadCharacteristic('2A65', 'Cycling Power Feature', [0x08, 0, 0, 0]), // 0x08 - crank revolution data supported
           new StaticReadCharacteristic('2A5D', 'Sensor Location', [13])         // 13 = rear hub
         ]
     });
