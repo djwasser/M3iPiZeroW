@@ -44,8 +44,8 @@ class CyclingPowerMeasurementCharacteristic extends  Bleno.Characteristic {
   };
 
   notify(event) {
-    if (!('power' in event) && !('rpm' in event)) {
-      // ignore events with no power and no crank data
+    if (!('power' in event)) {
+      // ignore events with no power
       return this.RESULT_SUCCESS;;
     }
   
@@ -62,19 +62,12 @@ class CyclingPowerMeasurementCharacteristic extends  Bleno.Characteristic {
 		// 01000000 - 64  - 0x040 - Extreme Force Magnitudes Present
 		// 10000000 - 128 - 0x080 - Extreme Torque Magnitudes Present
 	   
-		buffer.writeUInt16LE(0x0000, 0);
+		buffer.writeUInt16LE(0x0000, 0);  // only power data present
 	   
-		if ('power' in event) {
-		  var power = event.power;
-		  if (DEBUG) console.log("[powerService] power: " + power);
-		  buffer.writeInt16LE(power, 2);
-		}
+		var power = event.power;
+		if (DEBUG) console.log("[powerService] power: " + power);
+		buffer.writeInt16LE(power, 2);
 	  
-		if ('rpm' in event) {
-		  var rpm = event.rpm;
-		  if (DEBUG) console.log("[powerService] rpm: " + event.rpm);
-		  buffer.writeUInt16LE(rpm * 2, 4);
-		}
       this._updateValueCallback(buffer);
     }
     return this.RESULT_SUCCESS;
