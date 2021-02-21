@@ -1,7 +1,6 @@
 const Bleno = require('@abandonware/bleno');
 
 const HeartRateMeasurementCharacteristic = require('./heart-rate-measurement-characteristic');
-const StaticReadCharacteristic = require('./static-read-characteristic');
 
 class HeartRateService extends Bleno.PrimaryService {
 
@@ -10,9 +9,7 @@ class HeartRateService extends Bleno.PrimaryService {
     super({
         uuid: '180D',
         characteristics: [
-          HeartRateMeasurement,
-          new StaticReadCharacteristic('2A65', 'Cycling Power Feature', [0x00, 0, 0, 0]), // no additional features
-          new StaticReadCharacteristic('2A5D', 'Sensor Location', [13])         // 13 = rear hub
+          HeartRateMeasurement
         ]
     });
 
