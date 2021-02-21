@@ -9,3 +9,10 @@ My hope is that this will enable the broadest range of training software to acce
 
 I'll be learning how to use github and node.js at that same time, so likely will be a bit muddled for awhile!
 
+What is currently working:
+* Fitness Machine Service (FTMS) with power, instantaneous cadence, and heart rate
+  * all three successfully demonstrated to work with Kinomap on ipad
+  * power and cadence work with Zwift on iPad; no HR
+* Heart Rate Service
+  * Works with Zwift on iPad; so combined witj FTMS all three measurements available
+  * Works with Peloton on iPad    
