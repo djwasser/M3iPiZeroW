@@ -70,7 +70,8 @@ noble.on('discover', (peripheral) => {
 				console.log(`Bike ${result.ordinalId}: ${result.realTime} ${result.cadence} ${result.power} ${result.gear} ${result.duration}`); 
 				if (result.realTime) {
 					dataToSend = { 
-						rpm: result.cadence, 
+						rpm: result.cadence,
+						ftms: result.ftmscadence
 						power: result.power,
 						hr: result.heartRate,
 						speed: result.cadence * .73  // 30 cog 34 cassette for now
