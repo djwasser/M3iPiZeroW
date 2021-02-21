@@ -32,7 +32,7 @@ class IndoorBikeDataCharacteristic extends Bleno.Characteristic {
 	};
 
 	notify(event) {
-		if (!('power' in event) && !('hr' in event) && !('rpm' in event)) {
+		if (!('power' in event) && !('hr' in event) && !('ftmsrpm' in event)) {
 			// ignore events that do not have complete data set
 			return this.RESULT_SUCCESS; 
 		}
@@ -46,9 +46,9 @@ class IndoorBikeDataCharacteristic extends Bleno.Characteristic {
 
 			var index = 2;
 			
-			var rpm = event.rpm & 0xffff;  // force value to be 16-bit integer
-			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] rpm: " + rpm);
-			buffer.writeInt16LE(rpm, index);
+			var ftmsrpm = event.ftmsrpm & 0xffff;  // force value to be 16-bit integer
+			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] rpm: " + (ftmsrpm/2));
+			buffer.writeInt16LE(ftmsrpm, index);
 			index += 2;
 			
 			var power = event.power;
