@@ -44,6 +44,7 @@ const encodeStringToBytes = (rawString) => {
       interval: 0,
       realTime: false,
       cadence: 0,
+      ftmscadence: 0;
       heartRate: 0,
       power: 0,
       caloricBurn: 0,
@@ -74,7 +75,8 @@ const encodeStringToBytes = (rawString) => {
         throw new Error('Invalid machine id')
       }
   
-      broadcast.cadence = Math.round(twoByteConcat(data[index + 2], data[index + 3]) / 10)
+      broadcast.cadence = Math.round(twoByteConcat(data[index + 2], data[index + 3]) / 10) // reduce to 1 rpm resolution from 0.1 reported by M3i
+      broadcast.ftmscadence = Math.round(twoByteConcat(data[index + 2], data[index + 3]) / 5)  // FTMS expects 0.5 rpm resolution
       broadcast.heartRate = Math.round(twoByteConcat(data[index + 4], data[index + 5]) / 10) || null
       broadcast.power = twoByteConcat(data[index + 6], data[index + 7])
       broadcast.caloricBurn = twoByteConcat(data[index + 8], data[index + 9])
