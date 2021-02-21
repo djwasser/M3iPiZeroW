@@ -10,8 +10,8 @@ class HeartRateMeasurementCharacteristic extends  Bleno.Characteristic {
       properties: ['notify'],
       descriptors: [
         new Bleno.Descriptor({
-					uuid: '????',
-					value: '??????????'
+					uuid: '2901',
+					value: 'Heart Rate Measurement'
 				}),
         new Bleno.Descriptor({
           // Client Characteristic Configuration
