@@ -37,17 +37,19 @@ class IndoorBikeDataCharacteristic extends Bleno.Characteristic {
 			return this.RESULT_SUCCESS; 
 		}
 
+		// For ftms reference, see the Fitness Machine Service BLE Specification at 
+		// https://www.bluetooth.com/specifications/specs/fitness-machine-service-1-0/
+		// Note that info on data types for Indoor Bike Data are detailed (buried!!) in 
+		// the Control Point portion of the document. Also note the spec is in error
+		// for setting of flag bit 2.  Bit 2 must be set to 1 to indicate instanteous
+		// cadence (rpm) is present.
+		
 		if (this._updateValueCallback) {
 			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] Notify");
 			var buffer = new Buffer(7);
 			// set flags for rpm + power + heart rate
-			buffer.writeUInt8(0x45, 0);
-			buffer.writeUInt8(0x02, 1);
-
-			// For ftms refernce, see the Fitness Machine Service BLE Specification at 
-			// https://www.bluetooth.com/specifications/specs/fitness-machine-service-1-0/
-			// Note that info on data types for Indoor Bike Data are detailed (buried!!) in 
-			// the Control Point portion of the document. 
+			buffer.writeUInt8(0x45, 0); // power + rpm. Note that LSB Bit # 2 must be set to 1 for rpm present
+			buffer.writeUInt8(0x02, 1); // heart rate
 
 			var ftmsrpm = event.ftmsrpm & 0xffff;  // ensure ftmsrpm is a 16-bit integer
 			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] rpm: " + (ftmsrpm/2));
