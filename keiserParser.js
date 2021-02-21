@@ -44,7 +44,7 @@ const encodeStringToBytes = (rawString) => {
       interval: 0,
       realTime: false,
       cadence: 0,
-      ftmscadence: 0;
+      ftmscadence: 0,
       heartRate: 0,
       power: 0,
       caloricBurn: 0,
