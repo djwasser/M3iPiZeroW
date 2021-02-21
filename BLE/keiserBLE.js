@@ -110,7 +110,8 @@ class KeiserBLE extends EventEmitter {
 		if (isPoweredOn && keiserDeviceId != -1) {
 			bleno.startAdvertising(this.name, [
 				//this.cps.uuid, 
-				this.fms.uuid
+				this.fms.uuid,
+				this.hrs.uuid
 			]);
 		}
 	}
