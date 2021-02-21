@@ -5,7 +5,7 @@ class HeartRateMeasurementCharacteristic extends  Bleno.Characteristic {
  
   constructor() {
     super({
-      uuid: '2A63',
+      uuid: '2A37',
       value: null,
       properties: ['notify'],
       descriptors: [
@@ -49,11 +49,12 @@ class HeartRateMeasurementCharacteristic extends  Bleno.Characteristic {
 		  if (DEBUG) console.log("[HeartRateService] Notify");
 		  var buffer = new Buffer(8);
 		  
-		  buffer.writeUInt16LE(0x0000, 0);  // Only UINT8 Heart Rate
+		  // Set flags to indicated data only conatins UINT8 Heart Rate
+		  buffer.writeUInt16LE(0x0000, 0);
 		  
 		  var hr = event.hr & 0xff;  // ensure hr is an 8-bit integer
 		  if (DEBUG) console.log("[HeartRateService] heart rate: " + hr);
-		  buffer.writeUInt(hr, 2);
+		  buffer.writeUInt8(hr, 2);
 		  this._updateValueCallback(buffer);
 	  }
 	  return this.RESULT_SUCCESS;
