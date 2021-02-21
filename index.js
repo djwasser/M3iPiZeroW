@@ -71,7 +71,7 @@ noble.on('discover', (peripheral) => {
 				if (result.realTime) {
 					dataToSend = { 
 						rpm: result.cadence,
-						ftms: result.ftmscadence,
+						ftmsrpm: result.ftmscadence,
 						power: result.power,
 						hr: result.heartRate,
 						speed: result.cadence * .73  // 30 cog 34 cassette for now
