@@ -14,5 +14,5 @@ What is currently working:
   * all three successfully demonstrated to work with Kinomap on ipad
   * power and cadence work with Zwift on iPad; no HR
 * Heart Rate Service
-  * Works with Zwift on iPad; so combined witj FTMS all three measurements available
+  * Works with Zwift on iPad; so combined with FTMS all three measurements available
   * Works with Peloton on iPad    
