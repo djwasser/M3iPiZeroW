@@ -3,7 +3,6 @@ const EventEmitter = require('events');
 const CyclingPowerService = require('./cycling-power-service');
 const FitnessMachineService = require('./fitness-machine-service');
 const HeartRateService = require('./heart-rate-service');
-const Simulation = require('./simulation');
 
 var keiserDeviceId = -1;
 var isPoweredOn = false;
@@ -18,7 +17,6 @@ class KeiserBLE extends EventEmitter {
 		this.cps = new CyclingPowerService();
 		this.fms = new FitnessMachineService();
 		this.hrs = new HeartRateService();
-		this.simulation = new Simulation()
 
 		let self = this;
 		console.log(`[${this.name} starting]`);
@@ -44,7 +42,7 @@ class KeiserBLE extends EventEmitter {
 
 			if (!error) {
 				bleno.setServices([
-					//self.cps, 
+					self.cps, 
 					self.fms,
 					self.hrs
 				], 
