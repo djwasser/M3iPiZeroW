@@ -80,6 +80,7 @@ noble.on('discover', (peripheral) => {
 						crankcount: = ++cranks,
 						cranktime: = cranksCurrentEventTime;
 					};
+					cranks = cranks % 65535;
 					cranksLastEventTime = cranksCurrentEventTime;
 					if (fillInTimer) {
 						clearTimeout(fillInTimer);
