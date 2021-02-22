@@ -1,20 +1,18 @@
 var Bleno = require('@abandonware/bleno');
 var DEBUG = false;
-const FLAG_HASCRANKDATA = (1<<5);
-// Spec
-//https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.cycling_power_measurement.xml
+const FLAG_HASCRANKDATA = (1<<1);
 
-class CyclingPowerMeasurementCharacteristic extends  Bleno.Characteristic {
+class CscMeasurementCharacteristic extends  Bleno.Characteristic {
  
   constructor() {
     super({
-      uuid: '2A63',
+      uuid: '2A5B',
       value: null,
       properties: ['notify'],
       descriptors: [
         new Bleno.Descriptor({
 		uuid: '2903',
-		value: 'Cycling Power Measurement'
+		value: Buffer.alloc(2)
 	})
       ]
     });
@@ -22,44 +20,39 @@ class CyclingPowerMeasurementCharacteristic extends  Bleno.Characteristic {
   }
 
   onSubscribe(maxValueSize, updateValueCallback) {
-    if (DEBUG) console.log('[powerService] client subscribed to PM');
+    if (DEBUG) console.log('[cscService] client subscribed to PM');
     this._updateValueCallback = updateValueCallback;
     return this.RESULT_SUCCESS;
   };
 
   onUnsubscribe() {
-    if (DEBUG) console.log('[powerService] client unsubscribed from PM');
+    if (DEBUG) console.log('[cscService] client unsubscribed from PM');
     this._updateValueCallback = null;
     return this.RESULT_UNLIKELY_ERROR;
   };
 
   notify(event) {
-    if (!('power' in event) && !('crankcount' in event) && !('cranktime' in event)) {
+    if (!('crankcount' in event) && !('cranktime' in event)) {
       // ignore events that do not have all of the data expected
       return this.RESULT_SUCCESS;
     }
   
     if (this._updateValueCallback) {
-		if (DEBUG) console.log("[powerService] Notify");
-		var buffer = new Buffer(8);
+		if (DEBUG) console.log("[cscService] Notify");
+		var buffer = new Buffer(5);
 	        
 	        let flags = 0;
 	        flags |= FLAG_HASCRANKDATA;
-		buffer.writeUInt16LE(flags, 0);
+		buffer.writeUInt8(flags, 0);
 	    
-	        const power = event.power;
 	        const revolutions16bit = event.crankcount & 0xffff;
 	        const timestamp16bit = event.cranktime & 0xffff;
-		buffer.writeInt16LE(power, 2);
-	        buffer.writeUInt16LE(revolutions16bit, 4);
-	        buffer.writeUInt16LE(timestamp16bit, 6);
+	        buffer.writeUInt16LE(revolutions16bit, 1);
+	        buffer.writeUInt16LE(timestamp16bit, 3);
 	  
       this._updateValueCallback(buffer);
     }
     return this.RESULT_SUCCESS;
   }
-  
-  
 };
-
 module.exports = CyclingPowerMeasurementCharacteristic;
