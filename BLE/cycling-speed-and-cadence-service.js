@@ -1,29 +1,27 @@
 const Bleno = require('@abandonware/bleno');
 
-const CyclingPowerMeasurementCharacteristic = require('./cycling-power-measurement-characteristic');
+const CscMeasurementCharacteristic = require('./csc-measurement-characteristic');
 const StaticReadCharacteristic = require('./static-read-characteristic');
 
-class CyclingPowerService extends Bleno.PrimaryService {
+class  CyclingSpeedAndCadenceService extends Bleno.PrimaryService {
 
   constructor() {
-    let powerMeasurement = new CyclingPowerMeasurementCharacteristic();
+    let cscMeasurement = new CscMeasurementCharacteristic();
     super({
-        uuid: '1818',
+        uuid: '1816',
         characteristics: [
-          powerMeasurement,
-          // [0x08, 0, 0, 0] when 0x08 - crank revolution data supported
-          new StaticReadCharacteristic('2A65', 'Cycling Power Feature', [0x08, 0, 0, 0]), // when 0x08 - crank revolution data supported
-          new StaticReadCharacteristic('2A5D', 'Sensor Location', [13])         // 13 = rear hub
+          cscMeasurement,
+          new StaticReadCharacteristic('2A5C', 'CSC Feature', [2]) // crank revolution data
         ]
     });
 
-    this.powerMeasurement = powerMeasurement;
+    this.cscMeasurement = cscMeasurement;
   }
 
   notify(event) {
-    this.powerMeasurement.notify(event);
+    this.cscMeasurement.notify(event);
     return this.RESULT_SUCCESS;
   };
 }
 
-module.exports = CyclingPowerService;
+module.exports =  CyclingSpeedAndCadenceService ;
