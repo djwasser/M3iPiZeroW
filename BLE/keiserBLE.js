@@ -3,6 +3,7 @@ const EventEmitter = require('events');
 const CyclingPowerService = require('./cycling-power-service');
 const FitnessMachineService = require('./fitness-machine-service');
 const HeartRateService = require('./heart-rate-service');
+// const Simulation = require('./simulation');
 
 var keiserDeviceId = -1;
 var isPoweredOn = false;
