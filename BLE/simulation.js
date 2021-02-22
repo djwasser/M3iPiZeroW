@@ -66,4 +66,3 @@ export class Simulation extends EventEmitter {
     }, timeUntilNext);
   }
 }
-© 2021 GitHub, Inc.
