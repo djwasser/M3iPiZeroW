@@ -12,6 +12,8 @@ var fillInTimer = null;
 var dataToSend = null;
 var connectedCount = 0;
 var targetDeviceId = -1;
+var cranks = 0;
+var cranksLastEventTime = 0;
 
 console.log("Starting");
 
@@ -69,13 +71,16 @@ noble.on('discover', (peripheral) => {
 			if (result.ordinalId == targetDeviceId) {
 				console.log(`Bike ${result.ordinalId}: ${result.realTime} ${result.cadence} ${result.power} ${result.gear} ${result.duration}`); 
 				if (result.realTime) {
+					var cranksCurrentEventTime = (cranksLastEventTime + Math.round((60 * 1024)/result.cadence)) % 65535;
 					dataToSend = { 
 						rpm: result.cadence,
 						ftmsrpm: result.ftmscadence,
 						power: result.power,
 						hr: result.heartRate,
-						speed: result.cadence * .73  // 30 cog 34 cassette for now
+						crankcount: = ++cranks,
+						cranktime: = cranksCurrentEventTime;
 					};
+					cranksLastEventTime = cranksCurrentEventTime;
 					if (fillInTimer) {
 						clearTimeout(fillInTimer);
 						fillInTimer = null;
