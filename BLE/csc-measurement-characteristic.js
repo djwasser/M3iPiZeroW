@@ -55,4 +55,4 @@ class CscMeasurementCharacteristic extends  Bleno.Characteristic {
     return this.RESULT_SUCCESS;
   }
 };
-module.exports = CyclingPowerMeasurementCharacteristic;
+module.exports = CscMeasurementCharacteristic;
