@@ -85,10 +85,9 @@ class KeiserBLE extends EventEmitter {
 
 	// notify BLE Client
 	notifyClient(event) {
-		this.simulation.cadence = event.rpm;
 		this.cps.notify(event);
 		this.fms.notify(event);
-		this.hrs.notify(event);
+		this.hrs.notify(event)
 	};
 
 	setDeviceId(deviceId) {
