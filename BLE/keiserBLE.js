@@ -3,6 +3,7 @@ const EventEmitter = require('events');
 const CyclingPowerService = require('./cycling-power-service');
 const FitnessMachineService = require('./fitness-machine-service');
 const HeartRateService = require('./heart-rate-service');
+const CyclingSpeedAndCadenceService = require('./cycling-speed-and-cadence-service.js');
 
 var keiserDeviceId = -1;
 var isPoweredOn = false;
@@ -17,6 +18,7 @@ class KeiserBLE extends EventEmitter {
 		this.cps = new CyclingPowerService();
 		this.fms = new FitnessMachineService();
 		this.hrs = new HeartRateService();
+		this.csc = new CyclingSpeedAndCadenceService();
 
 		let self = this;
 		console.log(`[${this.name} starting]`);
@@ -44,7 +46,8 @@ class KeiserBLE extends EventEmitter {
 				bleno.setServices([
 					self.cps, 
 					self.fms,
-					self.hrs
+					self.hrs,
+					self.csc
 				], 
 				(error) => {
 					console.log(`[${this.name} setServices] ${(error ? 'error ' + error : 'success')}`);
@@ -87,7 +90,8 @@ class KeiserBLE extends EventEmitter {
 	notifyClient(event) {
 		this.cps.notify(event);
 		this.fms.notify(event);
-		this.hrs.notify(event)
+		this.hrs.notify(event);
+		this.csc.notify(event);
 	};
 
 	setDeviceId(deviceId) {
@@ -111,7 +115,8 @@ class KeiserBLE extends EventEmitter {
 			bleno.startAdvertising(this.name, [
 				this.cps.uuid, 
 				this.fms.uuid,
-				this.hrs.uuid
+				this.hrs.uuid,
+				this.csc.uuid
 			]);
 		}
 	}
