@@ -79,7 +79,7 @@ noble.on('discover', (peripheral) => {
 						power: result.power,
 						hr: result.heartRate,
 						crankcount: cranks,
-						cranktime: cranksCurrentEventTime;
+						cranktime: cranksCurrentEventTime
 					};
 					cranks = cranks % 65535;
 					cranksLastEventTime = cranksCurrentEventTime;
