@@ -77,10 +77,10 @@ noble.on('discover', (peripheral) => {
 						ftmsrpm: result.ftmscadence,
 						power: result.power,
 						hr: result.heartRate,
-						crankcount: ++cranks % 65535,
+						crankcount: ++cranks,
 						cranktime: cranksCurrentEventTime
 					};
-					//cranks = cranks % 65535;
+					cranks = cranks % 65535;
 					cranksLastEventTime = cranksCurrentEventTime;
 					if (fillInTimer) {
 						clearTimeout(fillInTimer);
