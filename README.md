@@ -15,4 +15,11 @@ What is currently working:
   * power and cadence work with Zwift on iPad; no HR
 * Heart Rate Service
   * Works with Zwift on iPad; so combined with FTMS all three measurements available
-  * Works with Peloton on iPad    
+  * Works with Peloton on iPad
+* Cycling Power Service (including cadence)
+* Cycling Speed and Cadence Service (cadence only)
+  * Once this service was implemented, cadence was found by Peloton running on the iPad
+
+Note that for the Cycling Power Service and for the Cycling Speed and Cadence service, the cadence information (crank count and timestamp) is calculated from the instantaneous rpms reported by the Keiser M3i.
+
+At this point, still using two bluetooth adapters: the one built into the Pi Zero W and a USB dongle.
