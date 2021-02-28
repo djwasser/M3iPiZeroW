@@ -1,5 +1,5 @@
-# M3iPiZeroW
-This repo is to dabble in translating Keiser M3i broadcasts into Bluetooth smart services useful for  use with training software.  Other folks are doing this (see [hypermoose/Keiser2Zwift](https://github.com/hypermoose/Keiser2Zwift) and [ptx2/gymnasticon](https://github.com/ptx2/gymnasticon)) but they both just implement part of the solution I want. My plan is to blatently approriate these projects as a starting point with the goal of setting up a headless PI Zero W with no additional dongles that can continuously scan the proprietary M3i broadcasts and implement the BLE services for:
+# M3iPiZeroW 
+This repo is to dabble in translating Keiser M3i broadcasts into Bluetooth smart services for use with training software.  Other folks are doing this (see [hypermoose/Keiser2Zwift](https://github.com/hypermoose/Keiser2Zwift) and [ptx2/gymnasticon](https://github.com/ptx2/gymnasticon)) but they both just implement part of the solution I want. My plan is to blatently approriate these projects as a starting point with the goal of setting up a headless PI Zero W with no additional dongles that can continuously scan the proprietary M3i broadcasts and implement the BLE services for:
 * Cycling Power (including cadence info)
 * Cycling Speed and Cadence (only cadence info)
 * Fitness Machine (power, instantaneous cadence, heart rate)
