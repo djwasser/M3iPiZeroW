@@ -72,12 +72,13 @@ noble.on('discover', (peripheral) => {
 				console.log(`Bike ${result.ordinalId}: ${result.realTime} ${result.cadence} ${result.power} ${result.gear} ${result.duration}`); 
 				if (result.realTime) {
 					var cranksCurrentEventTime = (cranksLastEventTime + Math.round((60 * 1024)/result.cadence)) % 65535;
+					cranks = cranks + 1;
 					dataToSend = { 
 						rpm: result.cadence,
 						ftmsrpm: result.ftmscadence,
 						power: result.power,
 						hr: result.heartRate,
-						crankcount: ++cranks,
+						crankcount: cranks,
 						cranktime: cranksCurrentEventTime
 					};
 					cranks = cranks % 65535;
