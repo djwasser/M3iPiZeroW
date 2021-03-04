@@ -3,12 +3,12 @@ Description=M3i
 After=network.target
 
 [Service]
-ExecStart=/home/pi/code/m3i/run.sh
-WorkingDirectory=/home/pi/code/m3i
+ExecStart=/home/pi/code/M3iPiZeroW/run.sh
+WorkingDirectory=/home/pi/code/M3iPiZeroW
 Type=idle
 Restart=always
 StandardOutput=syslog
-SyslogIdentifier=m3i
+SyslogIdentifier=M3iPiZeroW
 
 [Install]
 WantedBy=multi-user.target
