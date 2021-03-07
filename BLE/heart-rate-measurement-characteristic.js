@@ -47,7 +47,7 @@ class HeartRateMeasurementCharacteristic extends  Bleno.Characteristic {
 	  }
 	  if (this._updateValueCallback) {
 		  if (DEBUG) console.log("[HeartRateService] Notify");
-		  var buffer = new Buffer(2);
+		  var buffer = Buffer.alloc(2);
 		  
 		  // Set flags to indicate data only contains UINT8 Heart Rate
 		  buffer.writeUInt8(0x00, 0);
