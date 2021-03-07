@@ -15,7 +15,7 @@ class StaticReadCharacteristic extends Bleno.Characteristic {
 		});
 		this.uuid = uuid;
 		this.description = description;
-		this._value = Buffer.isBuffer(value) ? value : new Buffer(value);
+		this._value = Buffer.isBuffer(value) ? value : Buffer.from(value);
 	}
 	
 	onReadRequest(offset, callback) {
