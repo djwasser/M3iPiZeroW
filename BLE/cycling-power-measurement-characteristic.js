@@ -41,7 +41,7 @@ class CyclingPowerMeasurementCharacteristic extends  Bleno.Characteristic {
   
     if (this._updateValueCallback) {
 		if (DEBUG) console.log("[powerService] Notify");
-		var buffer = new Buffer(8);
+		var buffer = Buffer.alloc(8);
 	        
 	        let flags = 0;
 	        flags |= FLAG_HASCRANKDATA;
