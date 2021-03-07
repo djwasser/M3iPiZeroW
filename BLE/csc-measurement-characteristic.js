@@ -39,7 +39,7 @@ class CscMeasurementCharacteristic extends  Bleno.Characteristic {
   
     if (this._updateValueCallback) {
 		if (DEBUG) console.log("[cscService] Notify");
-		var buffer = new Buffer(5);
+		var buffer = Buffer.alloc(5);
 	        
 	        let flags = 0;
 	        flags |= FLAG_HASCRANKDATA;
