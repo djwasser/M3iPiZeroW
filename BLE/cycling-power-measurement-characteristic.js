@@ -35,7 +35,7 @@ class CyclingPowerMeasurementCharacteristic extends  Bleno.Characteristic {
 
   notify(event) {
     if (!('power' in event) && !('crankcount' in event) && !('cranktime' in event)) {
-      // ignore events that do not have all of the data expected
+      // ignore events that do not have all of the data expected.
       return this.RESULT_SUCCESS;
     }
   
