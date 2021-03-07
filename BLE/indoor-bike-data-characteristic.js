@@ -46,7 +46,7 @@ class IndoorBikeDataCharacteristic extends Bleno.Characteristic {
 		
 		if (this._updateValueCallback) {
 			if (DEBUG) console.log("[IndoorBikeDataCharacteristic] Notify");
-			var buffer = new Buffer(7);
+			var buffer = Buffer.alloc(7);
 			// set flags for rpm + power + heart rate
 			buffer.writeUInt8(0x45, 0); // power + rpm. Note that LSB Bit # 2 must be set to 1 for rpm present
 			buffer.writeUInt8(0x02, 1); // heart rate
