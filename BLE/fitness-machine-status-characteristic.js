@@ -54,7 +54,7 @@ class FitnessMachineStatusCharacteristic extends Bleno.Characteristic {
 
   notify (event) {
     if (DEBUG) console.log('[fitness-machine-status-characteristic.js] - notify')
-    var buffer = new Buffer.from(2)
+    var buffer = Buffer.alloc(2)
     // speed + power + heart rate
     buffer.writeUInt8(StatusOpCode.startedResumedUser, 0)
 
