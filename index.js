@@ -11,6 +11,7 @@ const KeiserBLE = require('./BLE/keiserBLE')
 var fillInTimer = null;
 var dataToSend = null;
 var connectedCount = 0;
+var abortCount = 0;
 var targetDeviceId = -1;
 var cranks = 0;
 var cranksLastEventTime = 0;
@@ -47,6 +48,12 @@ noble.on('stateChange', async (state) => {
 function sendFillInData() {
 	if (!dataToSend || (connectedCount < 1)) {
 		console.log("Aborting nothing to send");
+		// after 5 minutes assume there are no connections
+		if (++abortCount > 300) {
+			connectedCount = 0;
+		}
+	} else {
+		abortCount = 0;
 	}
 
 	console.log("Sending fill in data");
