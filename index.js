@@ -59,8 +59,10 @@ function sendFillInData() {
 
 	console.log("Sending fill in data");
 	keiserBLE.notifyClient(dataToSend);
-	fillInTimer = setTimeout(sendFillInData, 1000);
-}
+	if (connectedCount > 0) {
+		fillInTimer = setTimeout(sendFillInData, 1000);
+	};
+};
 
 noble.on('discover', (peripheral) => {
    	//console.log(`[Central] Found device ${peripheral.advertisement.localName} ${peripheral.address}`); 
