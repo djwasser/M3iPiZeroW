@@ -49,7 +49,8 @@ function sendFillInData() {
 	if (!dataToSend || (connectedCount < 1)) {
 		console.log("Aborting nothing to send");
 		// after 5 minutes assume there are no connections
-		if (++abortCount > 300) {
+		if (++abortCount > 60) {
+			console.log("Setting connected count to 0.");
 			connectedCount = 0;
 		}
 	} else {
