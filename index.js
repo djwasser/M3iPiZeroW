@@ -60,46 +60,56 @@ noble.on('discover', (peripheral) => {
 	if (peripheral.advertisement.localName == "M3") {
 		try {
 			var result = keiserParser.parseAdvertisement(peripheral);
-			if (targetDeviceId == -1) {
-				if (result.realTime) {
-					console.log(`Attaching to bike id ${result.ordinalId}`);
-					targetDeviceId = result.ordinalId;
-					keiserBLE.setDeviceId(targetDeviceId);
-				} else {
-					return;
-				}
-			}
-			if (result.ordinalId == targetDeviceId) {
-				console.log(`Bike ${result.ordinalId}: ${result.realTime} ${result.cadence} ${result.power} ${result.gear} ${result.duration}`); 
-				if (result.realTime) {
-					if (result.cadence > 0) {
-						var cranksCurrentEventTime = (cranksLastEventTime + Math.round((60 * 1024)/result.cadence)) % 65535;
-						cranks++;
+			console.log(`Bike ${result.ordinalId}: RT: ${result.realTime} RPM: ${result.cadence} PWR: ${result.power} GEAR: ${result.gear} ET: ${result.duration}`);
+			
+			// Only continue if M3i is transmitting real-time data
+			if (result.realTime) {
+				// Only use data coming from target device; if no target device set then set it
+				if (result.ordinalId != targetDeviceId) {
+					if (targetDeviceId == -1) {
+						console.log(`Attaching to bike id ${result.ordinalId}`);
+						targetDeviceId = result.ordinalId;
+						keiserBLE.setDeviceId(targetDeviceId);
 					} else {
-						var cranksCurrentEventTime = cranksLastEventTime;
+						return;
 					}
-					dataToSend = { 
+				}
+				
+				// Use current rpm (cadence) to simulate the crank count and crank event time for CPS and CSC services
+				// (for range of valid values for crank count and crank event time, see BLE specs)
+				if (result.cadence > 0) {
+					var cranksCurrentEventTime = (cranksLastEventTime + Math.round((60 * 1024)/result.cadence)) % 65535;
+					cranks++;
+				} else {
+					var cranksCurrentEventTime = cranksLastEventTime;
+				}
+				
+				// Assemble the data structure for the BLE service/characteristics to use
+				dataToSend = { 
 						rpm: result.cadence,
 						ftmsrpm: result.ftmscadence,
 						power: result.power,
 						hr: result.heartRate,
 						crankcount: cranks,
 						cranktime: cranksCurrentEventTime
-					};
-					cranks = cranks % 65535;
-					cranksLastEventTime = cranksCurrentEventTime;
-					if (fillInTimer) {
-						clearTimeout(fillInTimer);
-						fillInTimer = null;
-					}
-
-					if (connectedCount > 0) {
-						keiserBLE.notifyClient(dataToSend);
-						fillInTimer = setTimeout(sendFillInData, 1000);
-					}
+				};
+				// ensure value of cranks is in the range specified by the BLE specification
+				cranks = cranks % 65535;
+				cranksLastEventTime = cranksCurrentEventTime;
+				
+				// Reset the fill-data timer if it is set
+				if (fillInTimer) {
+					clearTimeout(fillInTimer);
+					fillInTimer = null;
+				}
+				
+				// Pass data to services/characteritcs to process and send to client; set a timer for fill-data
+				if (connectedCount > 0) {
+					keiserBLE.notifyClient(dataToSend);
+					fillInTimer = setTimeout(sendFillInData, 1000);
 				}
 			}
-		} 
+		}
 		catch (err) {
 			console.log(`\tError parsing: ${err}`);
 			console.log(`\t ${err.stack}`);
