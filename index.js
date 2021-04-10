@@ -5,8 +5,9 @@ process.env['BLENO_HCI_DEVICE_ID'] = 0
 process.env['NOBLE_HCI_DEVICE_ID'] = 1
 
 const noble = require('@abandonware/noble');
-const keiserParser = require('./keiserParser.js')
-const KeiserBLE = require('./BLE/keiserBLE')
+const keiserParser = require('./keiserParser.js');
+const KeiserBLE = require('./BLE/keiserBLE');
+const { createServer } = require('http');
 
 var fillInTimer = null;
 var dataToSend = null;
@@ -54,6 +55,15 @@ function sendFillInData() {
 	}
 
 };
+
+createServer((req, res) => {
+	res.writeHead(200, { 'Content-Type': 'text/html' })
+	res.end(`
+<h1>RPM: ${result.cadence}</h1> 
+<h1>Power: ${result.power}</h1>
+<h1>Gear: ${result.gear}</h1>
+<h1>Duration ${result.duration}</h1>`)
+}).listen(3000, () => console.log('server running - 3000'));
 
 noble.on('discover', (peripheral) => {
    	//console.log(`[Central] Found device ${peripheral.advertisement.localName} ${peripheral.address}`); 
