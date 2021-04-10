@@ -58,11 +58,15 @@ function sendFillInData() {
 
 createServer((req, res) => {
 	res.writeHead(200, { 'Content-Type': 'text/html' })
-	res.end(`
+	if (result) {
+		res.end(`
 <h1>RPM: ${result.cadence}</h1> 
 <h1>Power: ${result.power}</h1>
 <h1>Gear: ${result.gear}</h1>
-<h1>Duration ${result.duration}</h1>`)
+<h1>Duration ${result.duration}</h1>`);
+	} else {
+		res.end(`No Data`);
+	}
 }).listen(3000, () => console.log('server running - 3000'));
 
 noble.on('discover', (peripheral) => {
