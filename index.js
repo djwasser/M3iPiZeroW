@@ -65,7 +65,7 @@ createServer((req, res) => {
 <h1>Gear: ${result.gear}</h1>
 <h1>Duration ${result.duration}</h1>`);
 	} else {
-		res.end(`No Data`);
+		res.end(`<h1>No Data</h1>`);
 	}
 }).listen(3000, () => console.log('server running - 3000'));
 
