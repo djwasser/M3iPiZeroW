@@ -9,6 +9,7 @@ const keiserParser = require('./keiserParser.js');
 const KeiserBLE = require('./BLE/keiserBLE');
 const { createServer } = require('http');
 
+var result = null;
 var fillInTimer = null;
 var dataToSend = null;
 var connectedCount = 0;
@@ -73,7 +74,7 @@ noble.on('discover', (peripheral) => {
    	//console.log(`[Central] Found device ${peripheral.advertisement.localName} ${peripheral.address}`); 
 	if (peripheral.advertisement.localName == "M3") {
 		try {
-			var result = keiserParser.parseAdvertisement(peripheral);
+			result = keiserParser.parseAdvertisement(peripheral);
 			console.log(`Bike ${result.ordinalId}: RT: ${result.realTime} RPM: ${result.cadence} PWR: ${result.power} GEAR: ${result.gear} ET: ${result.duration}`);
 			
 			// Only continue if M3i is transmitting real-time data
