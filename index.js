@@ -73,9 +73,9 @@ createServer((req, res) => {
 		var fileStream = fs.createReadStream("KeiserM3i.png");
 		res.writeHead(200, { 'Content-Type': 'image/png' })
 		fileStream.pipe(res);
-		res.writeHead(200, { 'Content-Type': 'text/html' })
-		res.end(`
-<h1>No Data</h1>`);
+		//res.writeHead(200, { 'Content-Type': 'text/html' })
+		//res.end(`
+//<h1>No Data</h1>`);
 	}
 }).listen(3000, () => console.log('server running - 3000'));
 
