@@ -71,10 +71,7 @@ createServer((req, res) => {
 	} else {
 		res.writeHead(200, { 'Content-Type': 'text/html' })
 		res.end(`
-html * {
-  font-family: Arial;  
-}
-<h1>No Data</h1>`);
+<h1 style="font-family:verdana;">No Data</h1>`);
 	}
 }).listen(3000, () => console.log('server running - 3000'));
 
