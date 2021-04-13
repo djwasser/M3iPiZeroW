@@ -72,7 +72,7 @@ createServer((req, res) => {
 	} else {
 		fileToLoad = fs.readFileSync("KeiserM3i.png");
 		res.writeHead(200, { 'Content-Type': 'image/png' })
-		res.end(fileToLoad, 'binary');
+		res.write(fileToLoad, 'binary');
 		res.writeHead(200, { 'Content-Type': 'text/html' })
 		res.end(`
 <h1>No Data</h1>`);
