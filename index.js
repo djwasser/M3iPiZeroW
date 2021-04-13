@@ -67,7 +67,7 @@ createServer((req, res) => {
 <h1 style="font-family:verdana;">Cadence: ${result.cadence} rpms</h1> 
 <h1 style="font-family:verdana;">Power: ${result.power} watts</h1>
 <h1 style="font-family:verdana;">Gear: ${result.gear}</h1>
-<h1 style="font-family:verdana;">Duration: ${Math.round(result.duration/6)/10}: minutes</h1>`);
+<h1 style="font-family:verdana;">Duration: ${Math.floor(result.duration/60)} minutes ${result.duration % 60} seconds </h1>`);
 	} else {
 		res.writeHead(200, { 'Content-Type': 'text/html' })
 		res.end(`
