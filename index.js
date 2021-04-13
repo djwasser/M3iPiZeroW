@@ -62,12 +62,12 @@ createServer((req, res) => {
 	if (result) {
 		res.writeHead(200, { 'Content-Type': 'text/html' })
 		res.end(`
-<h1>${result.realTime ? "Keiser in in use" : "Summary Data" } rpms</h1> 
-<h1>=======================</h1> 
-<h1>Cadence: ${result.ftmscadence} rpms</h1> 
-<h1>Power: ${result.power} watts</h1>
-<h1>Gear: ${result.gear}</h1>
-<h1>Duration: ${Math.round(result.duration/60)} minutes</h1>`);
+<h1 style="font-family:verdana;">${result.realTime ? "Keiser in in use" : "Summary Data" }</h1> 
+<h1 style="font-family:verdana;">=======================</h1> 
+<h1 style="font-family:verdana;">Cadence: ${result.cadence} rpms</h1> 
+<h1 style="font-family:verdana;">Power: ${result.power} watts</h1>
+<h1 style="font-family:verdana;">Gear: ${result.gear}</h1>
+<h1 style="font-family:verdana;">Duration: ${Math.round(result.duration/6)/10}: minutes</h1>`);
 	} else {
 		res.writeHead(200, { 'Content-Type': 'text/html' })
 		res.end(`
