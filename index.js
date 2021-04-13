@@ -8,6 +8,7 @@ const noble = require('@abandonware/noble');
 const keiserParser = require('./keiserParser.js');
 const KeiserBLE = require('./BLE/keiserBLE');
 const { createServer } = require('http');
+const fs = require('fs');
 
 var result = null;
 var fillInTimer = null;
