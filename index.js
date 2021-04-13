@@ -64,9 +64,12 @@ createServer((req, res) => {
 <h1>RPM: ${result.cadence}</h1> 
 <h1>Power: ${result.power}</h1>
 <h1>Gear: ${result.gear}</h1>
-<h1>Duration ${result.duration}</h1>`);
+<h1>Duration ${result.duration}</h1>
+<img src="KeiserM3i.png">`);
 	} else {
-		res.end(`<h1>No Data</h1>`);
+		res.end(`
+<h1>No Data</h1>
+<img src="KeiserM3i.png">`);
 	}
 }).listen(3000, () => console.log('server running - 3000'));
 
