@@ -58,18 +58,23 @@ function sendFillInData() {
 };
 
 createServer((req, res) => {
-	res.writeHead(200, { 'Content-Type': 'text/html' })
 	if (result) {
+		fileToLoad = fs.readFileSync("KeiserM3i.png");
+		res.writeHead(200, { 'Content-Type': 'image/png' })
+		res.end(fileToLoad, 'binary');
+		res.writeHead(200, { 'Content-Type': 'text/html' })
 		res.end(`
 <h1>RPM: ${result.cadence}</h1> 
 <h1>Power: ${result.power}</h1>
 <h1>Gear: ${result.gear}</h1>
-<h1>Duration ${result.duration}</h1>
-<img src="KeiserM3i.png">`);
+<h1>Duration ${result.duration}</h1>`);
 	} else {
+		fileToLoad = fs.readFileSync("KeiserM3i.png");
+		res.writeHead(200, { 'Content-Type': 'image/png' })
+		res.end(fileToLoad, 'binary');
+		res.writeHead(200, { 'Content-Type': 'text/html' })
 		res.end(`
-<h1>No Data</h1>
-<img src="KeiserM3i.png">`);
+<h1>No Data</h1>`);
 	}
 }).listen(3000, () => console.log('server running - 3000'));
 
