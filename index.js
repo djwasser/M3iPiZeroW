@@ -60,22 +60,21 @@ function sendFillInData() {
 
 createServer((req, res) => {
 	if (result) {
-		fileToLoad = fs.readFileSync("KeiserM3i.png");
-		res.writeHead(200, { 'Content-Type': 'image/png' })
-		res.end(fileToLoad, 'binary');
 		res.writeHead(200, { 'Content-Type': 'text/html' })
 		res.end(`
-<h1>RPM: ${result.cadence}</h1> 
-<h1>Power: ${result.power}</h1>
+<h1>${result.realTime ? "Keiser in in use" : "Summary Data" } rpms</h1> 
+<h1>=======================</h1> 
+<h1>Cadence: ${result.ftmscadence} rpms</h1> 
+<h1>Power: ${result.power} watts</h1>
 <h1>Gear: ${result.gear}</h1>
-<h1>Duration ${result.duration}</h1>`);
+<h1>Duration: ${Math.round(result.duration/60)} minutes</h1>`);
 	} else {
-		var fileStream = fs.createReadStream("KeiserM3i.png");
-		res.writeHead(200, { 'Content-Type': 'image/png' })
-		fileStream.pipe(res);
-		//res.writeHead(200, { 'Content-Type': 'text/html' })
-		//res.end(`
-//<h1>No Data</h1>`);
+		res.writeHead(200, { 'Content-Type': 'text/html' })
+		res.end(`
+html * {
+  font-family: Arial;  
+}
+<h1>No Data</h1>`);
 	}
 }).listen(3000, () => console.log('server running - 3000'));
 
