@@ -28,9 +28,9 @@ I side benefit is the the PIZeroW without the dongle runs fine on the power from
 
 These installation steps are based on starting with a Raspberry PI Zero W, a blank miniSD card, and a laptop running Windows 10.
 
-1. Install the latest 32-bit Raspbian PI OS Lite image on the miniSD card.  I used the Raspberry Pi Imager v1.6.2 running on a Windows 10 laptop.  Once the image in written, the Imager automatically ejects the miniSD card.  I physically removed the miniSD card, reinserted it into the laptop, then went to Step 2.
+1. Install the latest 32-bit Raspbian PI OS Lite image on the miniSD card.  I used the Raspberry Pi Imager v1.6.2 running on a Windows 10 laptop.  Once the image is written, the Imager automatically ejects the miniSD card.  I physically removed the miniSD card, reinserted it into the laptop, then went to Step 2.
 2. Pre-setup for headless operation and to enable SSH connection:
-    * To configure for headless WiFi connection, create a text file named wpa_supplicant.conf and place it in the root directory of the miniSD card.  Add the folowing text to the file:
+    * To configure for headless WiFi connection, create a text file named wpa_supplicant.conf and place it in the root directory of the miniSD card.  Add the following text to the file:
         ```
         country=US
         ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
@@ -42,9 +42,9 @@ These installation steps are based on starting with a Raspberry PI Zero W, a bla
            psk="your_wifi_password"
         }
         ```
-    * To automaticllay enable SSH (Secure Socket Shell) connection to the Rapberry PI, create an empty file "ssh" (no file extenstion)in the root directory of the miniSD card.
-3. Eject the miniSD card, insert it into the Raspberry Pi Zero W, and power the Pi Zero up.  If all goes well, the Pi Zero will show up on your network.  You may need to use your router tools to determine the IP address assigned to the Pi Zero W.  For SSH connection from my laptop, I used Windows Power Shell and the ssh command.
-4. Once the Pi Zero W is up and running on your WiFi network, connect via SSH using the IP address noted in the previous step and log in using the pi account (default passwprd "raspberry"). At that point I executed the following two commands (the upgrade command may take awhile to complete):
+    * To automatically enable SSH (Secure Socket Shell) connection to the Rapberry PI, create an empty file "ssh" (no file extenstion) in the root directory of the miniSD card.
+3. Eject the miniSD card, insert it into the Raspberry Pi Zero W, and power the Pi Zero up.  If all goes well, the Pi Zero will show up on your network.  You may need to use your router tools to determine the IP address assigned to the Pi Zero W.  
+4. Once the Pi Zero W is up and running on your WiFi network, connect via SSH using the IP address noted in the previous step and log in using the pi account (default password "raspberry"). FYI, for SSH connection from my laptop, I used Windows Power Shell and the ssh command.  At that point I executed the following two commands (note that the upgrade command may take awhile to complete):
      ```
      pi@raspberrypi:~ $ sudo apt-get update
      pi@raspberrypi:~ $ sudo apt-get upgrade
@@ -111,7 +111,7 @@ Verify the the service started:
 ```
 systemctl status M3iPiZeroW
 ```
-Now reboot the Raspberry Pi, sonnect to the console using SSH and confirm the service is running:
+Now reboot the Raspberry Pi, connect to the console using SSH and confirm the service is running:
 ```
 systemctl status M3iPiZeroW
 ```
