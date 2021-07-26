@@ -22,7 +22,7 @@ Note that for the Cycling Power Service and for the Cycling Speed and Cadence se
 
 Installation of software roughly follows the steps used by [hypermoose/Keiser2Zwift](https://github.com/hypermoose/Keiser2Zwift).  When I get some time I will post some detailed intructions here starting from scratch.
 
-I side benefit is the the PIZeroW without the dongle runs fine on the power from the USB port on the back of my HDTV.  So I just have the PIZeroW velcroed to the back of the TV and powered by a short USB power cable which gives me nice clean "invisible" install.
+A side benefit is the the PIZeroW without the dongle runs fine on the power from the USB port on the back of my HDTV.  So I just have the PIZeroW velcroed to the back of the TV and powered by a short USB power cable which gives me nice clean "invisible" install.
 
 # Installation
 
