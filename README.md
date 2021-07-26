@@ -94,6 +94,22 @@ These installation steps are based on starting with a Raspberry PI Zero W, a bla
      ```
      sudo npm start
      ```
- 
+14. Start pedaling the Keiser bike. After about 5-10 seconds you should see messages about attaching to the Keiser M3i and data from the M3i should be displayed.  Start Zwift and verify that you can see and connect to the power and cadence services.
+
+At this point if everything is working, you can set things up to run without sudo and also to install the app as a service that runs whenever the Rapsberry Pi starts up. Enter Control-C to stop the running app and execute the following commands:
+```
+sudo apt-get install libcap2-bin
+sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
+```
+This enables running without sudo.  To set up as a service to always run, execute the following commands:
+```
+sudo cp M3iPiZeroW.service /etc/systemd/system
+sudo systemctl enable M3iPiZeroW
+sudo systemctl start M3iPiZeroW
+```
+Verify the the service started:
+```
+systemctl status M3iPiZeroW
+```
 
 
