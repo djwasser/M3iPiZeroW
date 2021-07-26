@@ -23,3 +23,47 @@ Note that for the Cycling Power Service and for the Cycling Speed and Cadence se
 Installation of software roughly follows the steps used by [hypermoose/Keiser2Zwift](https://github.com/hypermoose/Keiser2Zwift).  When I get some time I will post some detailed intructions here starting from scratch.
 
 I side benefit is the the PIZeroW without the dongle runs fine on the power from the USB port on the back of my HDTV.  So I just have the PIZeroW velcroed to the back of the TV and powered by a short USB power cable which gives me nice clean "invisible" install.
+
+# Installation
+
+These installation steps are based on starting with a Raspberry PI Zero W, a blank miniSD card, and a laptop running Windows 10.
+
+1. Install the latest 32-bit Raspbian PI OS Lite image on the miniSD card.  I used the Raspberry Pi Imager v1.6.2 running on a Windows 10 laptop.  Once the image in written, the Imager automatically ejects the miniSD card.  I physically removed the miniSD card, reinserted it into the laptop, then went to Step 2.
+2. Pre-setup for headless operation and to enable SSH connection:
+    * To configure for headless WiFi connection, create a text file named wpa_supplicant.conf and place it in the root directory of the miniSD card.  Add the folowing text to the file:
+        ```
+        country=US
+        ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+        update_config=1
+        
+        network={
+           scan_ssid=1
+           ssid="your_wifi_ssid"
+           psk="your_wifi_password"
+        }
+        ```
+    * To automaticllay enable SSH (Secure Socket Shell) connection to the Rapberry PI, create an empty file "ssh" (no file extenstion)in the root directory of the miniSD card.
+3. Eject the miniSD card, insert it into the Raspberry Pi Zero W, and power the Pi Zero up.  If all goes well, the Pi Zero will show up on your network.  You may need to use your router tools to determine the IP address assigned to the Pi Zero W.
+4. Once the Pi Zero W is up and running on your WiFi network, connect via SSH using the IP address noted in the previous step and log in using the pi account (default passwprd "raspberry"). At that point I executed the following two commands (the upgrade command may take awhile to complete):
+     ```
+     pi@raspberrypi:~ $ sudo apt-get update
+     pi@raspberrypi:~ $ sudo apt-get upgrade
+     ```
+5. Disable the default bluetooth service and move the file to a backup location to make sure it does not come back on rebot:
+    ```
+    sudo systemctl stop bluetooth
+    sudo systemctl disable bluetooth
+    sudo mv /usr/lib/bluetooth/bluetoothd bluetoothd.bak
+    ```
+6. Install the bluetooth development requirements:
+    ```
+    sudo apt-get install bluetooth bluez libbluetooth-dev libudev-dev
+    ```
+7. Install NVVM to manage Node.js versions:
+    ```
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+    ```
+8. At this point, I rebooted the Raspberry pi:
+    ```
+
+    ```
