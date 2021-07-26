@@ -63,7 +63,21 @@ These installation steps are based on starting with a Raspberry PI Zero W, a bla
     ```
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
     ```
-8. At this point, I rebooted the Raspberry pi:
+8. At this point, I rebooted the Raspberry pi and started a fresh SSH session:
     ```
+    sudo shutdown -r now
+    ```
+9.  Install a binary build of Node.js that supports Pis (I just used version 10.22.0 as I know it works).  After install I copied all the files to a directory that sudo looks for:
+    ```
+    nvm install 10.22.0
+    sudo cp -r /home/pi/.nvm/versions/node/v10.22.0/* /usr/local/
+    ```
+10. Install git, create directory /home/pi/code, make this the working directory and clone this repository:
+     ```
+     sudo apt update
+     sudo apt install git
+     mkdir /home/pi/code
+     cd /home/pi/code
+     git clone https://github.com/djwasser/M3iPiZeroW.git
+     ```
 
-    ```
