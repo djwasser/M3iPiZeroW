@@ -20,7 +20,7 @@ What is currently working:
 
 Note that for the Cycling Power Service and for the Cycling Speed and Cadence service, the cadence information (crank count and timestamp) is calculated from the instantaneous rpms reported by the Keiser M3i.
 
-A side benefit is the the PIZeroW without the dongle runs fine on the power from the USB port on the back of my HDTV.  So I just have the PIZeroW velcroed to the back of the TV and powered by a short USB power cable which gives me nice clean "invisible" install.
+A side benefit is that the PIZeroW without the dongle runs fine on the power from the USB port on the back of my HDTV.  So I just have the PIZeroW velcroed to the back of the TV and powered by a short USB power cable which gives me nice clean "invisible" install.
 
 # Installation
 
