@@ -80,4 +80,20 @@ These installation steps are based on starting with a Raspberry PI Zero W, a bla
      cd /home/pi/code
      git clone https://github.com/djwasser/M3iPiZeroW.git
      ```
+11. Change to the directory created by the git clone command and install the app:
+     ```
+     cd M3iPiZeroW
+     npm install
+     ```
+12. Enable the PI Zero's on-board bluetooth adaptor and verify that you can see it:
+     ```
+     sudo hciconfig hci0 up
+     hcitool dev
+     ```
+13. Start the app.  You should see messages to the console about powering on and starting scan:
+     ```
+     sudo npm start
+     ```
+ 
+
 
