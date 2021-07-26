@@ -43,7 +43,7 @@ These installation steps are based on starting with a Raspberry PI Zero W, a bla
         }
         ```
     * To automaticllay enable SSH (Secure Socket Shell) connection to the Rapberry PI, create an empty file "ssh" (no file extenstion)in the root directory of the miniSD card.
-3. Eject the miniSD card, insert it into the Raspberry Pi Zero W, and power the Pi Zero up.  If all goes well, the Pi Zero will show up on your network.  You may need to use your router tools to determine the IP address assigned to the Pi Zero W.
+3. Eject the miniSD card, insert it into the Raspberry Pi Zero W, and power the Pi Zero up.  If all goes well, the Pi Zero will show up on your network.  You may need to use your router tools to determine the IP address assigned to the Pi Zero W.  For SSH connection from my laptop, I used Windows Power Shell and the ssh command.
 4. Once the Pi Zero W is up and running on your WiFi network, connect via SSH using the IP address noted in the previous step and log in using the pi account (default passwprd "raspberry"). At that point I executed the following two commands (the upgrade command may take awhile to complete):
      ```
      pi@raspberrypi:~ $ sudo apt-get update
@@ -95,8 +95,8 @@ These installation steps are based on starting with a Raspberry PI Zero W, a bla
      sudo npm start
      ```
 14. Start pedaling the Keiser bike. After about 5-10 seconds you should see messages about attaching to the Keiser M3i and data from the M3i should be displayed.  Start Zwift and verify that you can see and connect to the power and cadence services.
-
-At this point if everything is working, you can set things up to run without sudo and also to install the app as a service that runs whenever the Rapsberry Pi starts up. Enter Control-C to stop the running app and execute the following commands:
+***
+At this point, if everything is working, you can set things up to run without sudo and also install the app as a service that runs whenever the Rapsberry Pi starts up. Enter Control-C to stop the running app and execute the following commands:
 ```
 sudo apt-get install libcap2-bin
 sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
@@ -111,5 +111,8 @@ Verify the the service started:
 ```
 systemctl status M3iPiZeroW
 ```
-
-
+Now reboot the Raspberry Pi, sonnect to the console using SSH and confirm the service is running:
+```
+systemctl status M3iPiZeroW
+```
+Now pedal the Keiser and confirm you can connect to power and cadence from Zwift
