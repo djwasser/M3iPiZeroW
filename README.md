@@ -47,7 +47,7 @@ These installation steps are based on starting with a Raspberry PI Zero W, a bla
      pi@raspberrypi:~ $ sudo apt-get update
      pi@raspberrypi:~ $ sudo apt-get upgrade
      ```
-5. Disable the default bluetooth service and move the file to a backup location to make sure it does not come back on rebot:
+5. Disable the default bluetooth service and move the file to a backup location to make sure it does not come back on reboot:
     ```
     sudo systemctl stop bluetooth
     sudo systemctl disable bluetooth
