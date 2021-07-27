@@ -14,7 +14,7 @@ What is currently working:
 * Heart Rate Service  
   * Works with Zwift on iPad; so combined with FTMS all three measurements available
   * Works with Peloton on iPad.  Functions fine with HR Strap that talks to M3i.  With no HR stap, Peloton seems to see random "ghost" heart rate values.  As documented in [closed issue #3](https://github.com/djwasser/M3iPiZeroW/issues/3), there are five lines to comment out to disable HR Service.  
-* Cycling Power Service (including cadence)
+* Cycling Power Service (including cadence) - note that this has NOT been demonstrated to work (see open issue #4 for [RGT Cycling won't connect](https://github.com/djwasser/M3iPiZeroW/issues/4))
 * Cycling Speed and Cadence Service (cadence only)
   * Once this service was implemented, cadence was found by Peloton running on the iPad
 
