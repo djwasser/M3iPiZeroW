@@ -13,8 +13,18 @@ class CyclingPowerMeasurementCharacteristic extends  Bleno.Characteristic {
       properties: ['notify'],
       descriptors: [
         new Bleno.Descriptor({
-		uuid: '2903',
+		uuid: '2901',
 		value: 'Cycling Power Measurement'
+	}),
+	new Bleno.Descriptor({
+		// Client Characteristic Configuration
+		uuid: '2902',
+		value: Buffer.alloc(2)
+	}),
+	new Bleno.Descriptor({
+		// Server Characteristic Configuration
+		uuid: '2903',
+		value: Buffer.alloc(2)
 	})
       ]
     });
