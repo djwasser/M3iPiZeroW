@@ -11,9 +11,9 @@ What is currently working:
 * Fitness Machine Service (FTMS) with power, instantaneous cadence, and heart rate
   * all three successfully demonstrated to work with Kinomap on ipad
   * power and cadence work with Zwift on iPad; no HR
-* Heart Rate Service / note: functions correctly but commented out.  See note on Peloton below.  
+* Heart Rate Service  
   * Works with Zwift on iPad; so combined with FTMS all three measurements available
-  * Works with Peloton on iPad.  Functions fine with HR Strap that talks to M3i.  With no HR stap, Peloton seems to see random "ghost" heart rate values. So commented out for now as I typically use a Wahoo TICKR that does not talk to M3i.  
+  * Works with Peloton on iPad.  Functions fine with HR Strap that talks to M3i.  With no HR stap, Peloton seems to see random "ghost" heart rate values.  As documented in closed issue #3, there are five lines to comment out to disable HR Service.  
 * Cycling Power Service (including cadence)
 * Cycling Speed and Cadence Service (cadence only)
   * Once this service was implemented, cadence was found by Peloton running on the iPad
