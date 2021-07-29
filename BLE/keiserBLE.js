@@ -1,7 +1,7 @@
 const bleno = require('@abandonware/bleno');
 const EventEmitter = require('events');
 const CyclingPowerService = require('./cycling-power-service');
-const FitnessMachineService = require('./fitness-machine-service');
+//const FitnessMachineService = require('./fitness-machine-service');
 const HeartRateService = require('./heart-rate-service');
 const CyclingSpeedAndCadenceService = require('./cycling-speed-and-cadence-service.js');
 
