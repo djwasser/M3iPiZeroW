@@ -54,15 +54,15 @@ class CyclingPowerMeasurementCharacteristic extends  Bleno.Characteristic {
 		var buffer = Buffer.alloc(8);
 	        
 	        let flags = 0;
-	        //flags |= FLAG_HASCRANKDATA;
+	        flags |= FLAG_HASCRANKDATA;
 		buffer.writeUInt16LE(flags, 0);
 	    
 	        const power = event.power;
 	        const revolutions16bit = event.crankcount & 0xffff;
 	        const timestamp16bit = event.cranktime & 0xffff;
 		buffer.writeInt16LE(power, 2);
-	        //buffer.writeUInt16LE(revolutions16bit, 4);
-	        //buffer.writeUInt16LE(timestamp16bit, 6);
+	        buffer.writeUInt16LE(revolutions16bit, 4);
+	        buffer.writeUInt16LE(timestamp16bit, 6);
 	  
       this._updateValueCallback(buffer);
     }
