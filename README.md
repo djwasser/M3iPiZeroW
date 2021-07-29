@@ -1,27 +1,31 @@
 # M3iPiZeroW 
-This repo is my (finally!) successful attempt to set up a headless PI Zero W with no additional dongles that can continuously scan the proprietary M3i broadcasts and implement the BLE services for:
+This repo is my attempt to set up a headless PI Zero W with no additional dongles that can continuously scan the proprietary M3i broadcasts and implement the BLE services for:
 * Cycling Power (including cadence info)
 * Cycling Speed and Cadence (only cadence info)
-* Fitness Machine (power, instantaneous cadence, heart rate)
 * Heart Rate
 
 I blatantly appropriated some of the work other folks are doing (see [hypermoose/Keiser2Zwift](https://github.com/hypermoose/Keiser2Zwift) and [ptx2/gymnasticon](https://github.com/ptx2/gymnasticon)) and was able to implement all of the BLE services using only the single on-board PIZeroW bluetooth adapter. 
 
 What is currently working:
-* Fitness Machine Service (FTMS) with power, instantaneous cadence, and heart rate
-  * all three successfully demonstrated to work with Kinomap on ipad
-  * power and cadence work with Zwift on iPad; no HR
 * Heart Rate Service  
-  * Works with Zwift on iPad; so combined with FTMS all three measurements available
-  * Works with Peloton on iPad.  Functions fine with HR Strap that talks to M3i.  With no HR stap, Peloton seems to see random "ghost" heart rate values.  As documented in [closed issue #3](https://github.com/djwasser/M3iPiZeroW/issues/3), there are five lines to comment out to disable HR Service.  
-* Cycling Power Service (including cadence) - note that this has NOT been demonstrated to work (see open issue #4 for [RGT Cycling won't connect](https://github.com/djwasser/M3iPiZeroW/issues/4))
+  * Shown to work with Zwift, Kinomap, FulGaz, and Peloton iPad
+  * is not found by RTG Cycling
+  * For Peloton HR functions fine with HR Strap that talks to M3i.  With no HR stap, Peloton seems to see random "ghost" heart rate values.  As documented in [closed issue #3](https://github.com/djwasser/M3iPiZeroW/issues/3), there are five lines to comment out to disable HR Service.  
+* Cycling Power Service (including cadence)
+  * Works with Zwift, FulGaz, Kinomap, RTG Cycling
+  * Peloton on iPad does not look for power service, so does not find cadence. 
 * Cycling Speed and Cadence Service (cadence only)
   * Once this service was implemented, cadence was found by Peloton running on the iPad
 
 Note that for the Cycling Power Service and for the Cycling Speed and Cadence service, the cadence information (crank count and timestamp) is calculated from the instantaneous rpms reported by the Keiser M3i.
 
-A side benefit is that the PIZeroW without the dongle runs fine on the power from the USB port on the back of my HDTV.  So I just have the PIZeroW velcroed to the back of the TV and powered by a short USB power cable which gives me nice clean "invisible" install.
+A side benefit of using only the on-board bluetooth adaptor is that the PiZeroW without the dongle runs fine on the power from the USB port on the back of my HDTV.  So I just have the PIZeroW velcroed to the back of the TV and powered by a short USB power cable which gives me nice clean "invisible" install.
 
+I also created a Fitness Machine Service that is currently disabled (via commments in code) because it appears that most Apps do not need it.  Prior to disabling, it was verfied that for power, instantaneous cadence, and heart rate:
+  * all three successfully demonstrated to work with Kinomap on ipad
+  * power and cadence work with Zwift on iPad; no HR
+
+***
 # Installation
 
 These installation steps are based on starting with a Raspberry PI Zero W, a blank miniSD card, and a laptop running Windows 10.
