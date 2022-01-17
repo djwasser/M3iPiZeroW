@@ -89,7 +89,7 @@ noble.on('discover', (peripheral) => {
 	if (peripheral.advertisement.localName == "M3") {
 		try {
 			result = keiserParser.parseAdvertisement(peripheral);
-			console.log(`Bike ${result.ordinalId}: RT: ${result.realTime} RPM: ${result.cadence} PWR: ${result.power} HR:${result.heartrate} GEAR: ${result.gear} ET: ${result.duration}`);
+			console.log(`Bike ${result.ordinalId}: RT: ${result.realTime} RPM: ${result.cadence} PWR: ${result.power} HR:${result.heartRate} GEAR: ${result.gear} ET: ${result.duration}`);
 			
 			// Only continue if M3i is transmitting real-time data
 			if (result.realTime) {
