@@ -28,14 +28,7 @@ class FitnessMachineStatusCharacteristic extends Bleno.Characteristic {
     super({
       uuid: '2ADA',
       value: null,
-      properties: ['notify'],
-      descriptors: [
-        new Bleno.Descriptor({
-          // Client Characteristic Configuration
-          uuid: '2902',
-          value: Buffer.alloc(2)
-        })
-      ]
+      properties: ['notify','read','write', 'writeWithoutResponse'],
     })
     this._updateValueCallback = null
   }
