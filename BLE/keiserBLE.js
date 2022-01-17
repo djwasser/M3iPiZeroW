@@ -71,7 +71,7 @@ class KeiserBLE extends EventEmitter {
 
 		bleno.on('accept', (clientAddress) => {
 			console.log(`[${this.name} accept] Client: ${clientAddress}`);
-			self.emit('accept', clientAddress);
+			self.emit('connect', clientAddress);
 			//bleno.updateRssi();
 		});
 
