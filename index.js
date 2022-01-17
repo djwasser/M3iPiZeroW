@@ -47,14 +47,14 @@ noble.on('stateChange', async (state) => {
     }
 });
 
-//noble.on('scanStop', async () => {
-//	console.log("Restarting BLE Scan");
-//	try {
-//		await noble.startScanningAsync(null, true);
-//	} catch (err) {
-//		console.log("Unable to restart BLE Scan: " + err);
-//	}
-//});
+noble.on('scanStop', async () => {
+	console.log("Restarting BLE Scan");
+	try {
+		await noble.startScanningAsync(null, true);
+	} catch (err) {
+		console.log("Unable to restart BLE Scan: " + err);
+	}
+});
 
 function sendFillInData() {
 	if (!dataToSend || (connectedCount < 1)) {
