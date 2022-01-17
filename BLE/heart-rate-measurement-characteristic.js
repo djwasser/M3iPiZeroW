@@ -13,10 +13,6 @@ class HeartRateMeasurementCharacteristic extends  Bleno.Characteristic {
 					uuid: '2901',
 					value: 'Heart Rate Measurement'
 				}),
-        new Bleno.Descriptor({
-          // Client Characteristic Configuration
-          uuid: '2902',
-          value: Buffer.alloc(2)
         }),
         new Bleno.Descriptor({
           // Server Characteristic Configuration
