@@ -8,7 +8,7 @@ class CscMeasurementCharacteristic extends  Bleno.Characteristic {
     super({
       uuid: '2A5B',
       value: null,
-      properties: ['notify'],
+      properties: ['notify','read','write', 'writeWithoutResponse'],
       descriptors: [
         new Bleno.Descriptor({
 		uuid: '2903',
