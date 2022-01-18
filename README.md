@@ -1,3 +1,6 @@
+# THIS NO LONGER WORKS
+Instructions below and current code do not result in working system.  No timetable for a fix.
+
 # M3iPiZeroW 
 This repo is my attempt to set up a headless PI Zero W with no additional dongles that can continuously scan the proprietary M3i broadcasts and implement the BLE services for:
 * Cycling Power (including cadence info)
